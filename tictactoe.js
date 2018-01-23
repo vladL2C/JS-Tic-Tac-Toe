@@ -15,16 +15,31 @@ function gameFactory(name1, name2) {
     gridSquares.forEach((square, index) => (square.innerHTML = boardArray[index]));
   }
 
-  function placeSymbol(player) {
+  let currentPlayer = player1;
+
+  function placeSymbol() {
     gridSquares.forEach((square,index) => {
       square.addEventListener('click',function(){
-          let symbol = player.symbol
+        if(currentPlayer === player1) {
+          let symbol = currentPlayer.symbol
           this.textContent = symbol;
-          boardArray[index] = symbol;       
+          boardArray[index] = symbol;
+          currentPlayer = player2; 
+        } else {
+          let symbol = currentPlayer.symbol
+          this.textContent = symbol;
+          boardArray[index] = symbol;
+          currentPlayer = player1; 
+        } 
       });
     });
   }
-  return {placeSymbol,boardArray};
+
+
+
+  
+
+  return {placeSymbol}
 
 }
 
