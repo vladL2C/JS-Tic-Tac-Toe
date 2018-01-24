@@ -36,3 +36,7 @@
   width: 20rem;
   font-size: 14px;
 }
+
+.message.is-success {
+  font-size: 2rem;
+}
