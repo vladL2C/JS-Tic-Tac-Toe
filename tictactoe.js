@@ -16,21 +16,17 @@ function gameFactory(name1, name2) {
   }
 
   let currentPlayer = player1;
-  let turnCount = 0;
 
   function placeSymbol(square,index) {
         if (boardArray[index] !== "") return;
-        
         if(currentPlayer === player1) {
           square.textContent = currentPlayer.symbol;
           boardArray[index] = currentPlayer.symbol;;
           currentPlayer = player2; 
-          console.log(boardArray);
         } else {
           square.textContent = currentPlayer.symbol;
           boardArray[index] = currentPlayer.symbol;
           currentPlayer = player1; 
-          console.log(boardArray);
         } 
   }
 
@@ -47,7 +43,11 @@ function gameFactory(name1, name2) {
   function winDisplay(player) {
     modal.classList.add('is-active');
     let winnerContent = document.querySelector('.thewinner');
-    winnerContent.textContent = `${player.name} is the winner!`;
+    if (player.name) { 
+      winnerContent.textContent = `${player.name} is the winner!`;
+    } else {
+      winnerContent.textContent = `It's a Tie!`;
+    } 
     let restartGame = document.querySelector('.button.is-info.is-large');
     restartGame.addEventListener('click', renderNewGame);
   }
@@ -80,7 +80,7 @@ function gameFactory(name1, name2) {
 
     if (!boardArray.includes('') 
         && winner === false )
-      console.log('tie cunt');
+      winDisplay('Tie');
 
   }
 
@@ -89,7 +89,6 @@ function gameFactory(name1, name2) {
       square.addEventListener('click', function() {
         placeSymbol(square, index);
         checkWin(boardArray);
-
       });
     });
 
