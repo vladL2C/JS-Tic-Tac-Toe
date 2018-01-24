@@ -6,37 +6,44 @@ function playerFactory(name, symbol) {
 function gameFactory(name1, name2) {
   let boardArray = ["","","","","","","","",""];
 
+  if(name1 === "") name1 = "player 1";
+  if(name2 === "") name2 = "player 2";
+
   let player1 = playerFactory(name1, "X");
   let player2 = playerFactory(name2, "O");
 
 
-  let gridSquares = document.querySelectorAll('.gridsquare');
+  const gridSquares = document.querySelectorAll('.gridsquare');
   function drawGameBoard() {
     gridSquares.forEach((square, index) => (square.innerHTML = boardArray[index]));
   }
 
   let currentPlayer = player1;
-
+  let turnPerson = document.querySelector('.turn');
+  turnPerson.textContent = currentPlayer.name +"'s" + "Turn!";
   function placeSymbol(square,index) {
         if (boardArray[index] !== "") return;
         if(currentPlayer === player1) {
+          turnPerson.textContent = player2.name +"'s" + "Turn!";
           square.textContent = currentPlayer.symbol;
           boardArray[index] = currentPlayer.symbol;;
           currentPlayer = player2; 
         } else {
+          turnPerson.textContent = player1.name +"'s" + "Turn!";
           square.textContent = currentPlayer.symbol;
           boardArray[index] = currentPlayer.symbol;
           currentPlayer = player1; 
         } 
   }
 
-  let modal = document.querySelector('.modal');
+  const modal = document.querySelector('.modal');
   function renderNewGame() {
     boardArray = ["","","","","","","","",""];
     modal.classList.remove('is-active');
     console.log(boardArray);
     gridSquares.forEach(square => square.innerHTML = '');
     currentPlayer = player1;
+    turnPerson.textContent = currentPlayer.name +"'s" + "Turn!";
   }
 
   
@@ -100,6 +107,18 @@ function gameFactory(name1, name2) {
 
 }
 
+const form = document.querySelector('form');
+const playNow = document.querySelector('.playnow');
 
-let game = gameFactory('vlad','malika');
-game.play();
+
+function initializeGame() {
+  const gameBoard = document.querySelector('.gameboard');
+  playNow.addEventListener('click', function() {
+    gameBoard.classList.add('fade');
+    let game = gameFactory(form.name1.value,form.name2.value);
+    form.parentNode.removeChild(form);
+    game.play();
+  })
+}
+
+initializeGame();

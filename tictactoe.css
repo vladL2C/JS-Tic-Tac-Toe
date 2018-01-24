@@ -6,7 +6,7 @@
   height: 400px;
   width:400px;
   background: beige;
-  opacity: 1;
+  opacity: 0;
   transition: opacity 2s
   
 }
@@ -39,4 +39,8 @@
 
 .message.is-success {
   font-size: 2rem;
+}
+
+.turn {
+  font-size: 30px;
 }
