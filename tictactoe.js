@@ -17,31 +17,40 @@ function gameFactory(name1, name2) {
 
   let currentPlayer = player1;
 
-  function placeSymbol() {
-    gridSquares.forEach((square,index) => {
-      square.addEventListener('click',function(){
+  function placeSymbol(square,index) {
+        if (boardArray[index] !== "") return;
+        
         if(currentPlayer === player1) {
           let symbol = currentPlayer.symbol
-          this.textContent = symbol;
+          square.textContent = symbol;
           boardArray[index] = symbol;
           currentPlayer = player2; 
+          console.log(boardArray);
         } else {
           let symbol = currentPlayer.symbol
-          this.textContent = symbol;
+          square.textContent = symbol;
           boardArray[index] = symbol;
           currentPlayer = player1; 
+          console.log(boardArray);
         } 
-      });
-    });
   }
 
+  function play() {
+    gridSquares.forEach((square,index) => {
+      square.addEventListener('click', function() {
+        placeSymbol(square, index);
+        console.log(index);
+      });
+    });
 
+  }
 
   
 
-  return {placeSymbol}
+  return {play}
 
 }
 
 let vlad = playerFactory('Vlad','O');
 let game = gameFactory();
+game.play();
