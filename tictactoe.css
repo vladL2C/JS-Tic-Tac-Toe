@@ -3,11 +3,12 @@
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
-  height: 400px;
-  width:400px;
+  height: 375px;
+  width:375px;
   background: beige;
   opacity: 0;
   transition: opacity 2s
+  justify-content: center;
   
 }
 
@@ -19,7 +20,6 @@
   height:33%;
   border:1px solid black;
   margin-left: 1px;
-  justify-content: center;
   
 }
 
